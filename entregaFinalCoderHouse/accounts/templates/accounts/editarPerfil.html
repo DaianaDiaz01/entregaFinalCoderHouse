@@ -1,0 +1,29 @@
+{% extends "paginas/padre.html" %}
+{% block titulo %}
+    Bienvenido {{usuario.username}}
+{% endblock %}
+{% block subtitulo %} 
+    A continuación puedes modificar las siguientes informaciones relacionadas con tu perfil:
+{% endblock %}
+{% block contenido %}
+    
+    <form action="" method="POST">
+
+        {% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+
+        <input type="submit" class="btn btn-primary p-2 mt-2" value="Editar perfil">
+    </form>
+    <div class="card text-center my-5">
+        <div class="card-header">
+            Eliminar perfil
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">¿Ya no quieres ser parte de nuestra comunidad?</h5>
+            <p class="card-text">Si es asi, a continuación está el botón para desvincular tu usuario, fue un agrado tenerte con nosotros <b>(Esta acción es irreversible)</b></p>
+            <a href="{% url 'EliminarPerfil' %}" class="btn btn-danger">Eliminar mi perfil</a>
+        </div>
+    </div>
+{% endblock %}

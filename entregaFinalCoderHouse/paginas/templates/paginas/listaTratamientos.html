@@ -1,0 +1,37 @@
+{% extends "paginas/padre.html" %}
+
+
+{% load static %}
+
+    {% block titulo %}
+        <h1 class="mb-1">Tratamientos Odontologicos</h1>
+        <br>
+        <hr size="8px" color="black" />
+        <br>
+        <h2>Acá tenemos todos los Tratamientos:</h2>
+    {% endblock %}
+
+      {% block contenido %}
+        <ul>
+        {% for tratamiento in object_list %}
+        <h3>Tratamiento: {{ tratamiento.tratamiento }}</h3>
+        <div style="font-size:1rem;"><span class="text-secondary">Por: {{ tratamiento.autor}}</span> | <span class="badge">{{ tratamiento.fecha }}</span></div>
+        <p>
+          <a href="{% url 'detalleTratamientos' tratamiento.id %}">Ver más información</a>
+          {% if user.username == "admin" %}
+          <a href="{% url 'editTratamientos' tratamiento.id %}">Editar</a>
+          <a href="{% url 'deleteTratamientos' tratamiento.id %}">Borrar</a>
+          {%  endif  %}
+        </p>
+        
+        </li>
+        {% endfor %}
+        </ul>
+      {% endblock %}
+
+
+      {% block contenido2 %}
+      {% if user.username == "admin"  %}
+      <a href="{% url 'newTratamientos' %}" class="btn btn-success" style="float: right;">Crear Tratamiento</a>
+      {% endif  %}
+      {% endblock %}
